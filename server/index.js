@@ -20,7 +20,12 @@ rollbar.log('Hello world!')
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
 app.get("/Hello", (req, res) => {
-    world()
+    try {
+        world()   
+    } catch (error) {
+        
+    }
+    
 })
 
 app.get('*', (req, res) => {
