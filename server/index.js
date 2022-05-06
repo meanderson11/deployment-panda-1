@@ -9,7 +9,7 @@ const app = express();
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
-    accessToken: '10d545fab2e740a1a8dd7f7436ec309c',
+    accessToken: '9bd47386c81440bc8174a51f21076ce0',
   captureUncaught: true,
   captureUnhandledRejections: true,
 })
