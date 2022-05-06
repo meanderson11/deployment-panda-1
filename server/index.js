@@ -6,6 +6,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
+
+
 app.get('*', (req, res) => {
   const htmlFilePath = path.resolve(__dirname, '..', 'client', 'index.html');
 
