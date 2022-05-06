@@ -40,3 +40,7 @@ body {
     margin-bottom: 100px;
     border-radius: 50%;
   }
+
+  label {
+    font-family: "Fira Sans", sans-serif;
+}
