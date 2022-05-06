@@ -4,7 +4,7 @@ const { PORT, NODE_ENV } = process.env;
 
 const path = require('path');
 const express = require('express');
-const app = express();
+const cors = require('cors');
 
 // include and initialize the rollbar library with your access token
 var Rollbar = require('rollbar')
@@ -17,16 +17,18 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
 app.get("/Hello", (req, res) => {
     try {
-        world()   
-    } catch (error) {
-        
-    }
-    
-})
+        world();
+      } catch (error) {
+        rollbar.error(error, req);
+      }
+    });
 
 app.use(rollbar.errorHandler());
 
