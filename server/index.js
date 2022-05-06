@@ -6,8 +6,22 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+    accessToken: '10d545fab2e740a1a8dd7f7436ec309c',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
+
+
+app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
+app.get("/Hello", (req, res) => {
+    world()
+})
 
 app.get('*', (req, res) => {
   const htmlFilePath = path.resolve(__dirname, '..', 'client', 'index.html');
