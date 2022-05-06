@@ -1,22 +1,21 @@
 require('dotenv').config();
 
-const {PORT, NODE_ENV} = process.env;
+const { PORT, NODE_ENV } = process.env;
 
+const path = require('path');
 const express = require('express');
-const cors = require('cors');
-const path = require("path");
-
-
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "../client/index.html"));
-})
+app.get('*', (req, res) => {
+  const htmlFilePath = path.resolve(__dirname, '..', 'client', 'index.html');
 
-const port = process.env.PORT || 4040;
+  res.sendFile(htmlFilePath);
+});
 
-app.listen(port, () => {
-    console.log(`We have blast off ${port}`);
+app.listen(PORT, () => {
+  if (NODE_ENV === 'development') {
+    console.log(`Server running on http://localhost:${PORT}/`);
+  } else {
+    console.log(`Server running on port ${PORT}`);
+  }
 });
