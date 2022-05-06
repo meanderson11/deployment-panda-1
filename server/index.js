@@ -28,11 +28,14 @@ app.get("/Hello", (req, res) => {
     
 })
 
+app.use(rollbar.errorHandler());
+
 app.get('*', (req, res) => {
   const htmlFilePath = path.resolve(__dirname, '..', 'client', 'index.html');
 
   res.sendFile(htmlFilePath);
 });
+
 
 app.listen(PORT, () => {
   if (NODE_ENV === 'development') {
